@@ -1,0 +1,32 @@
+{
+  "name": "Diff for gist.github",
+  "version": "1.2",
+  "description": "Adds a diff function to http://gist.github.com/",
+  "icons": {
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "64": "icon_64.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://gist.github.com/*",
+        "https://gist.github.com/*"
+      ],
+      "js": [
+        "jsdeferred.userscript.js",
+        "diff.js",
+        "jquery.js",
+        "diff_for_gist.user.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://gist.github.com/",
+    "https://api.github.com/"
+  ],
+  "homepage_url": "https://github.com/NV/diff-for-gist.github",
+  "minimum_chrome_version": "13",
+  "update_url": "http://clients2.google.com/service/update2/crx"
+}

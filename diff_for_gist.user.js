@@ -6,7 +6,7 @@
 // @require        https://raw.github.com/gist/105908/diff.js
 // ==/UserScript==
 
-(function() {
+(function(unsafeWindow) {
   var $ = unsafeWindow.jQuery;
   var rev = $('#revisions li');
   if(+rev.length <= 1) return;
@@ -27,14 +27,14 @@
     .bind('click', diffExec)
     .attr('disabled', 'disabled')
   );
-  
+
   function diffSelect(e) {
     var me = e.target;
     var c = $('#revisions li input:checked');
     if(c.length > 2) c.each(function(i) { c[i].checked = (c[i] == me); });
     $('#diffExec').attr('disabled', (c.length != 2));
   }
-  
+
   function diffExec() {
     if(!$('#diffView').length) $('#files').prepend('<div id="diffView"></div>');
     var diffView = $('#diffView');
@@ -44,20 +44,28 @@
     var desc = selected.map(function(){ return $(this).parent().text().replace(/\s+/g, ' '); });
     var xhr = function(url) {
       return $.Deferred(function(d) {
-        setTimeout(function() {
-          GM_xmlhttpRequest({ method: 'GET', url: url, onload: d.resolve });
-        },0);
+        var req = new XMLHttpRequest();
+        req.open('GET', url, true);
+        req.onreadystatechange = function() {
+          if(req.readyState == 4) {
+             if(req.status == 200)
+               d.resolve(req.responseText);
+             else
+               d.resolve("Error loading page\n");
+          }
+        };
+        req.send(null);
       }).promise();
     };
-    
+
     $.when(xhr(link[0]), xhr(link[1])).then(function(res1, res2) {
       var wrapHtml = function(s) {
         return '<div class="file"><div class="data syntax"><div class="highlight"><pre>' 
               + s + '</pre></div></div></div>'
       };
       var diffHtml = [], diffQueue = [];
-      var files1 = JSON.parse(res1.responseText).files, 
-          files2 = JSON.parse(res2.responseText).files;
+      var files1 = JSON.parse(res1).files,
+          files2 = JSON.parse(res2).files;
       var listChanged = (files1.length != files2.length);
       $.each(files1, function(k) {
         if(!files2[k]) listChanged = true;
@@ -100,4 +108,4 @@
       diffView.html(html).slideDown('normal');
     });
   }
-})()
+})(window.wrappedJSObject || window);
