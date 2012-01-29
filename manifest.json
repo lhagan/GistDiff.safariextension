@@ -15,7 +15,6 @@
         "https://gist.github.com/*"
       ],
       "js": [
-        "jsdeferred.userscript.js",
         "diff.js",
         "jquery.js",
         "diff_for_gist.user.js"
