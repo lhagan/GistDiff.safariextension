@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Luke Hagan</string>
+	<key>Builder Version</key>
+	<string>8536.26.14</string>
+	<key>CFBundleDisplayName</key>
+	<string>Gist Diff</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.lukehagan.gistdiff</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.2</string>
+	<key>CFBundleVersion</key>
+	<string>1.2</string>
+	<key>Chrome</key>
+	<dict/>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>jquery.js</string>
+				<string>diff.js</string>
+				<string>diff_for_gist.user.js</string>
+			</array>
+		</dict>
+	</dict>
+	<key>Description</key>
+	<string>Add diff functionality to GitHub Gists</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Allowed Domains</key>
+			<array>
+				<string>gist.github.com</string>
+				<string>api.github.com</string>
+			</array>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>Some</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>https://github.com/lhagan/GistDiff.safariextension</string>
+</dict>
+</plist>
